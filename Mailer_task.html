@@ -1,0 +1,200 @@
+<!DOCTYPE html >
+<html xmlns="">
+<head>
+<title>HTML Mailer Task</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body { 
+  -webkit-text-size-adjust:none; 
+  -ms-text-size-adjust:none; 
+}
+input { 
+  display:none; 
+}
+
+@media (max-width:480px) and (-webkit-min-device-pixel-ratio: 0){
+ #logo {height:28px !important;
+   margin-top:3px;
+ }
+ .main-table, .main-content img { width:100% !important;}
+}
+
+@media (max-width:480px) and (-webkit-min-device-pixel-ratio: 0){
+
+    #navcontainer{
+      position:relative;
+    }
+    #navcontainer th{
+      display:block;
+      width: 100%;
+      border-bottom:2px solid #ffffff;
+      height:18px;
+      padding: 10px 0px;      
+    }
+    #menucontainer{
+      position:relative;
+      overflow:hidden;
+    }
+    #navcontainer table{
+      margin-top:-500px;
+      -ms-transition: margin-top .5s ease-in-out;
+      -webkit-transition: margin-top .5s ease-in-out;      
+    }
+    /* checkbox mechanism */
+    #navcheckbox:checked + table{
+      margin-top:0%;
+    }      
+    /* fallback hover mechanism */
+    .nav-over,.nav-under{
+     display:block !important;
+     max-height:none !important;
+     padding-top:3px;
+     padding-bottom:3px;
+    } 
+    .nav-over img,.nav-under img{
+     display:block;
+     float:right;
+     margin-right:5px;
+    } 
+    /*
+    to deal with quirks in windows 8.1 and Outlook iOS
+    */
+    .nav-over{
+     -ms-transition-delay: 1.5s;
+     -webkit-transition-delay: 1.5s;            
+    }
+    #navcontainer > .nav-over:hover + div table{
+      margin-top:0% !important;
+    }
+    #navcontainer > .nav-over:hover{
+      visibility:hidden;
+    }
+}    
+</style>
+</head>
+<body style="margin:0px; padding:0px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="black">
+<tr>
+  <td align="center">
+  <table width="600" border="0" cellspacing="0" cellpadding="0" align="center" class="main-table">
+    <tr>
+    <td>
+      <table align="left" border="0" cellpadding="10" cellspacing="0"><tr>
+        <td>
+          <a href="https://www.epsilon.com/us/"><img id="logo" border="0" height="35" src="data:image/png;base64,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"></a>
+          <div class="eps-panelCapstone__background"><div class="eps-panelCapstone__background__shift"><div class="eps-panelCapstone__background__image parallax" style="background-image: url(&quot;https://www.epsilon.com/hs-fs/hubfs/All%20Epsilon/Homepage/Capstone%20scroller%20B/homepage_cap_ribbon_fill_slide1.jpg?length=1920&amp;name=homepage_cap_ribbon_fill_slide1.jpg&quot;); background-position: 50% 0%;"></div><div class="eps-panelCapstone__background__trap"></div></div><div class="eps-ribbon eps-ribbon--center-center  eps-ribbon--light  eps-ribbon--backslash  ribbon--spin  eps-ribbon--backslash"><div class="eps-ribbon__offset eps-ribbon__offset--bottom"></div></div></div>
+        </td>
+      </tr></table>
+    </td></tr>
+    <tr><td>
+      <div id="navcontainer">
+        <!--[if !mso 9]><!-->
+        <label for="navcheckbox">
+        <div class="nav-under" style="display:none;overflow:hidden;max-height:0px;background-color:#3b5369;"><img src="https://freshinbox.com/examples/hamburger-menu/images/hamburger.png" width="30" height="30" alt="Show Menu" border="0"></div>
+        <div class="nav-over" style="display:none;overflow:hidden;max-height:0px;position:absolute;top:0px;width:100%;opacity:0
+        "><img src=""C:\Users\Vishal\Downloads\clipart365828.png"" width="30" height="30" alt="Show Menu" border="0"></div>
+        </label>
+        <!--<![endif]-->
+        <div id="menucontainer">
+        <!--[if !mso 9]><!--><input id="navcheckbox" type="checkbox" style="display:none !important;mso-hide:all"><!--<![endif]-->
+        <table cellspacing="0" cellpadding="0" border="0" width="100%" bgcolor="#3b5369" style="width:100% !important">
+            <tr>
+            <th height="25" align="center" valign="center"><a href="https://ui.harmony.epsilon.com/auth/okta/login" target="_blank" style="font-size:15px;font-family:arial,sans-serif;color:#ffffff;font-weight:bold;text-decoration:none;">My Account</a></th>
+            <th height="25" align="center"><a href="https://www.epsilon.com/us/about-us/giving-back" target="_blank" style="font-size:15px;font-family:arial,sans-serif;color:#ffffff;font-weight:bold;text-decoration:none;">About Us</a></th>
+            <th height="25" align="center"><a href="https://www.epsilon.com/us/about-us/our-locations" target="_blank" style="font-size:15px;font-family:arial,sans-serif;color:#ffffff;font-weight:bold;text-decoration:none;">Find Office</a></th>            
+            <th height="25" align="center"><a href="https://www.epsilon.com/data-driven-marketing-solutions-contact-us" target="_blank" style="font-size:15px;font-family:arial,sans-serif;color:#ffffff;font-weight:bold;text-decoration:none;">Contact Us</a></th>
+            </tr>
+        </table>
+        </div>
+      </div><BR>
+      <table cellspacing="0" cellpadding="0" border="0" width="100%" class="main-content"><tr><td>
+      <img src="https://inspiredpixel.files.wordpress.com/2014/12/banner.jpg" width="600" style="width:1000px;height:600px">
+      </td></tr>
+     
+  
+      <tr>
+      <td style="font-size:18px;font-family:arial,sans-serif;color:#555555;padding:20px;"><BR>
+        <style>
+          * {
+            box-sizing: border-box;
+          }
+          
+          .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            font-size: 30px;
+            text-align: center;
+          }
+          
+          .flex-item-left {
+            background-color: #f1f1f1;
+            padding: 10px;
+            flex: 50%;
+          }
+          
+          .flex-item-right {
+            background-color: dodgerblue;
+            padding: 10px;
+            flex: 50%;
+          }
+          
+          /* Responsive layout - makes a one column-layout instead of a two-column layout */
+          @media (max-width: 800px) {
+            .flex-item-right, .flex-item-left {
+              flex: 100%;
+            }
+          }
+          </style>
+        <div class="split left">
+          <div class="centered">
+            <img src="https://www.kapiteinlabs.com/wp-content/uploads/2018/04/whatwedo-1024x338.png" alt="what" style="width:500px;height:600px" >
+    <h2>What We Do</h2>
+    <p>Transforming data-driven marketing into long-lasting relationships.
+
+     <ul>
+       <li>
+         Epsilon provides unique solutions that strategically combine analytics, rich data and technology.
+       </li>
+       <li>
+         We identify where potential customers are,where they've been and how to win their loyalty. . By partnering with the leading technology providers in each area relevant to marketing,
+       </li>
+       <li>
+By partnering with leading technology providers in each area relevant to marketing, we create powerful tools and campaigns
+       </li>
+     </ul>
+      
+</p>
+  </div>
+</div>
+        <div class="split right">
+          <div class="centered">
+            <img src="https://gransa.com/wp-content/uploads/2021/05/who.png" alt=" why" style="width:500px;height:600px" >
+            <h2> WHO WE ARE </h2>
+            <p>We make connections that bond people to brands.
+              <ul>
+                <li>
+                   We figure out who you need to talk to, dunderstand who they are, how they think and how to talk to them.
+              
+                </li> 
+                <li>
+                   We create targeted-messages that hit the right media, mindset and moment to convert them into customers.
+              
+                </li>
+                 <li>
+                  After we've helped you win their business, we help you win their hearts. We engage customers with your brand and turn them into your most loyal fans, so great results become sustainable results.</p>
+        
+                </li>
+              </ul>
+
+                </div>
+        </div>
+      </td></tr></table>
+      </td>
+      </tr>
+  </table>
+  </td>
+  </tr>
+</table>
+</body>
+</html>
